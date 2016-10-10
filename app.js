@@ -38,6 +38,21 @@ bot.on('conversationUpdate', function (message) {
             .text('いらっしゃいませー ' + membersAdded + ' さん');
         bot.send(reply);
     }
+
+    if (message.membersRemoved) {
+        var membersRemoved = message.membersRemoved
+            .map((m) => {
+                var isSelf = m.id === message.address.bot.id;
+                return (isSelf ? message.address.bot.name : m.name);
+            })
+            .join(', ');
+
+        var reply = new builder.Message()
+            .address(message.address)
+            .text('ばいばーい' + membersRemoved + ' さん');
+        bot.send(reply);
+    }
+
 });
 
 // Root dialog
