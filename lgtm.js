@@ -1,7 +1,7 @@
 module.exports = {
-    Label: 'Hello',
+    Label: 'Lgtm',
     Dialog: function (session) {
-        session.send('きつねーーーー:kitune2: ');
+        session.send('LGTM :kitune5:');
         session.endDialog();
     }
 };

@@ -15,6 +15,14 @@ var connector = new builder.ChatConnector({
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
+// Dialogs
+var Lgtm = require('./lgtm');
+var Hello = require('./hello');
+
+// Setup dialogs
+bot.dialog('/lgtm', Lgtm.Dialog);
+bot.dialog('/hello', Hello.Dialog);
+
 // Bot conversation
 bot.on('conversationUpdate', function (message) {
     if (message.membersAdded) {
@@ -32,14 +40,8 @@ bot.on('conversationUpdate', function (message) {
     }
 });
 
-// Bot Dialog
+// Root dialog
 bot.dialog('/', new builder.IntentDialog()
     .matchesAny([/^hello$/, /^コンコン$/], '/hello')
+    .matches(/^.*どやー.*/, '/lgtm')
 );
-
-bot.dialog('/hello', [
-    function (session) {
-        session.send('きつねーーーー:kitune2: ');
-        session.endDialog();
-    }
-]);
