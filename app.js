@@ -34,7 +34,7 @@ bot.on('conversationUpdate', function (message) {
 
 // Bot Dialog
 bot.dialog('/', new builder.IntentDialog()
-    .matches(/^hello/i, '/hello')
+    .matchesAny([/^hello$/, /^コンコン$/], '/hello')
 );
 
 bot.dialog('/hello', [
